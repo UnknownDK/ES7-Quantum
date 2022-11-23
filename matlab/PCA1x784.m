@@ -4,10 +4,10 @@ clear;
 % load dataset
 load('mnist_all.mat');
 
-tr8 = im2double(train8');
-trn = tr8(:,4); %Bruger fjerde billede, fordi det er flåt
-mu = mean(tr8')';
-Sigma = cov(tr8' - mu'); 
+tr0 = [im2double(train0') im2double(train1') im2double(train2')];
+trn = tr0(:,7004); %Bruger fjerde billede, fordi det er flåt
+mu = mean(tr0')';
+Sigma = cov(tr0' - mu'); 
 [U S V] = svd(Sigma);
 
 % Most important eigenvectors
@@ -18,7 +18,7 @@ z = V_reduced'*(trn-mu);
 trn_mod = V_reduced * z + mu;
 
 figure(1)
-imshow(rot90(reshape(train8(4,:),[28 28]),1))
+imshow(rot90(reshape(train0(4,:),[28 28]),1))
 figure(2)
 imshow(rot90(reshape(trn_mod(:,1),[28,28]),1))
 

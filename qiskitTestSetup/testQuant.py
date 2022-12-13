@@ -32,3 +32,14 @@ x = time() - nu
 
 print("Result: ", result.get_counts())
 print(x)
+print(qc.__class__)
+
+#from qiskit.algorithms.optimizers import SPSA
+#from qiskit_machine_learning.algorithms.classifiers import VQC
+#log = OptimizerLog()
+#vqc = VQC(feature_map=encodedCircuit,
+#          ansatz=ansatz,
+#          loss='cross_entropy',
+#          optimizer=SPSA(callback=log.update),
+#          initial_point=optiPara,
+#          )

@@ -2,6 +2,7 @@ from time import time
 from qiskit import QuantumCircuit, transpile, IBMQ, providers
 #from qiskit.providers import *
 from qiskit.visualization import plot_histogram
+from qiskit_machine_learning.algorithms.classifiers import VQC
 
 provider = IBMQ.load_account()
 
@@ -31,12 +32,6 @@ nu = time()
 
 
 qc = QuantumCircuit(5, 5)
-qc.h([0,2])
-qc.cx(0,1)
-qc.x(3)
-qc.cz(2,3)
-qc.h(2)
-qc.ccx(2,3,4)
 
 
 
@@ -54,9 +49,9 @@ for kk in range(4):
 
 x = time() - nu
 print(x)
-exit()
 
-job = backend.run(transQC, shots=100)
+
+job = backend.run(qc, shots=8192)
 try:
     job_result = job.result()  # It will block until the job finishes.
     print("The job finished with result {}".format(job_result))
@@ -69,7 +64,7 @@ resultater = job_result.get_counts()
 
 print("Result: ", resultater)
 
-print(resultater['1111'])
+#print(resultater['1111'])
 
 
 #How to plot

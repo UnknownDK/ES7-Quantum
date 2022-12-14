@@ -30,6 +30,7 @@ def list_files(startpath):
             print('.' + str(level) + ' \href{' + gitlink + 'tree/master/' + folderpath + '}{' + os.path.basename(root) + '/}.' )
             for f in files:
                 if not any(ele in f for ele in ignore):
-                    print('.' + str(level + 1) + ' \href{' + gitlink + 'blob/master/' + folderpath + f + '}{' + f + '}.' )
+                    filename = f.replace("_", "\_")
+                    print('.' + str(level + 1) + ' \href{' + gitlink + 'blob/master/' + folderpath + f + '}{' + filename + '}.' )
     print("}")
 list_files(dir)

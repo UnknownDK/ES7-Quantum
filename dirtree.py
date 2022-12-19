@@ -11,7 +11,7 @@ usepackage{dirtree}
 """
 
 # Tilføj mappe/fil navne til ignore, hvis den skal ignorere dem
-ignore = [".git", "requirements.txt"]
+ignore = [".git"]
 
 def list_files(startpath):
     print("\dirtree{%")

@@ -1,16 +1,15 @@
 import os
-import re
 
+# Place this in the preamble of your Latex project
+# \usepackage{dirtree}
+
+# E.g. C:/Users/user/Desktop/Folder/ on windows or /root/folder/ on linux.
 dir = 'C:/Users/tardi/Desktop/ES7-Quantum/'
 
+# Link to the Github e.g. https://github.com/UnknownDK/ES7-Quantum/
 gitlink = "https://github.com/UnknownDK/ES7-Quantum/"
 
-"""
-Du skal huske at have denne i preamblen:
-usepackage{dirtree}
-"""
-
-# Tilføj mappe/fil navne til ignore, hvis den skal ignorere dem
+# Ignore list. This can be specific files/folders or even file extensions e.g. script.py, secretfolder, .git.
 ignore = [".git", ".csv"]
 
 def list_files(startpath):
@@ -20,9 +19,7 @@ def list_files(startpath):
             level = root.replace(startpath, '').count(os.sep) + 1
             if os.path.basename(root) != "":
                 level += 1
-            #print(root)
             folders = root.replace('\\', '/').split('/')
-            #print(folders)
             for fold in reversed(folders):
                 if fold in dir:
                     del(folders[folders.index(fold)])
@@ -33,7 +30,7 @@ def list_files(startpath):
             for f in files:
                 if not any(ele in f for ele in ignore):
                     filename = f.replace("_", "\_")
-                    #print(folderpath)
                     print('.' + str(level + 1) + ' \href{' + gitlink + 'blob/master/' + folderpath + f + '}{' + filename + '}.' )
     print("}")
+
 list_files(dir)

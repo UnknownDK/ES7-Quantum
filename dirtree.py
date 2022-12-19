@@ -11,7 +11,7 @@ usepackage{dirtree}
 """
 
 # Tilføj mappe/fil navne til ignore, hvis den skal ignorere dem
-ignore = [".git"]
+ignore = [".git", ".csv"]
 
 def list_files(startpath):
     print("\dirtree{%")
@@ -20,17 +20,20 @@ def list_files(startpath):
             level = root.replace(startpath, '').count(os.sep) + 1
             if os.path.basename(root) != "":
                 level += 1
-            folders = re.split(r' |/|\\', root)
+            #print(root)
+            folders = root.replace('\\', '/').split('/')
+            #print(folders)
             for fold in reversed(folders):
                 if fold in dir:
                     del(folders[folders.index(fold)])
             folderpath = ""
             for folder in folders:
                 folderpath += folder + "/"
-            print('.' + str(level) + ' \href{' + gitlink + 'tree/master/' + folderpath + '}{' + os.path.basename(root) + '/}.' )
+            print('.' + str(level) + ' \href{' + gitlink + 'tree/master/' + folderpath + '}{' + os.path.basename(root).replace("_", "\_") + '/}.' )
             for f in files:
                 if not any(ele in f for ele in ignore):
                     filename = f.replace("_", "\_")
+                    #print(folderpath)
                     print('.' + str(level + 1) + ' \href{' + gitlink + 'blob/master/' + folderpath + f + '}{' + filename + '}.' )
     print("}")
 list_files(dir)
